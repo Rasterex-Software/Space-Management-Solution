@@ -1,0 +1,15 @@
+# TODO review/adjust
+# Used for starting the mockserver
+# docker-composer -f docker-compose.mockservert.yml up
+version: '3'
+services:
+  mockServer:
+    # image: jamesdbloom/mockserver:latest
+    image: jamesdbloom/mockserver:mockserver-5.5.1
+    ports:
+      - 9080:1080
+      - 9090:1090
+    environment:
+      - LOG_LEVEL=WARN
+    command: ["/opt/mockserver/run_mockserver.sh", "-logLevel", "INFO", "-serverPort", "1080","-jvmOptions", "-Dmockserver.enableCORSForAllResponses=true"]
+

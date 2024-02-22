@@ -1,0 +1,48 @@
+{
+    "extends": [
+        "tslint:recommended"
+    ],
+    "project": "./tsconfig.json",
+    "linterOptions":{
+        "exclude": [
+            "**/node_modules/**/*",
+            "**/coverage/**/*",
+            "node_modules/**/*",
+            "compiled-output",
+            "legacy/*",
+            "src/*.js",
+            "dist/**/*",
+            "split/**/*",
+            "*.js"
+        ]
+    },
+//    "jsRules": {},
+    "rules": {
+        "ordered-imports": false,
+        "interface-over-type-literal": false,
+        "variable-name": {
+            "options": [
+                "ban-keywords",
+                "check-format"
+            ]
+        },
+        "object-literal-sort-keys": false,
+        "member-access": false,
+        "member-ordering": [
+            true,
+            {
+                "order": [
+                    "static-field",
+                    "instance-field",
+                    "static-method",
+                    "instance-method"
+                ]
+            }
+        ],
+        "no-console": false,
+        "quotemark": {
+            "options": ["single", "avoid-escape"]
+        }
+    },
+    "rulesDirectory": []
+}

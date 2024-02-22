@@ -1,0 +1,13 @@
+# TODO decide if a docker compose file is needed and adjust it.
+# currently used to share/check the build/artefacts from the docker container
+version: '3'
+services:
+  rxbuildtest:
+    build:
+       context: .
+       dockerfile: Dockerfile
+    ports:
+      - 8080:80
+# http://localhost:8080/rxcorefunctions.iife.js
+# http://localhost:8080/node_modules.tar.gz
+
