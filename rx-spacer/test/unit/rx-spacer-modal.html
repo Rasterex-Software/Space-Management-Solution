@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>rx-spacer-modal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../node_modules/chai/chai.js"></script>
+    <script src="../../node_modules/mocha/mocha.js"></script>
+    <script src="../../node_modules/wct-mocha/wct-mocha.js"></script>
+</head>
+
+<body>
+    <test-fixture id="basic">
+        <template>
+            <rx-spacer-modal></rx-spacer-modal>
+        </template>
+    </test-fixture>
+
+    <script type="module">
+        import '@polymer/test-fixture';
+        import '../../src/rx-spacer-modal.js';
+
+        suite('rx-spacer-modal tests', function () {
+            let modal;
+
+            setup(function () {
+                modal = fixture('basic');
+
+                // Make tests wait until elements are rendered.
+                return Promise.all([modal.updateComplete]);
+            });
+
+            test('becomes visible when active true', done => {
+                modal.active = true;
+
+                // Data bindings will stamp out new DOM asynchronously
+                // so wait to check for updates
+                flush(function () {
+                    assert.equal(modal.visible, true);
+                    assert.equal(modal.hidden, false);
+                    done();
+                });
+            });
+
+            test('becomes hidden when active true', done => {
+                modal.active = true;
+                modal.active = false;
+                // Data bindings will stamp out new DOM asynchronously
+                // so wait to check for updates
+                flush(function () {
+                    assert.equal(modal.visible, false);
+                    assert.equal(modal.hidden, true);
+                    done();
+                });
+            });
+
+            test('closes on overlay click', done => {
+                modal.active = true;
+                const overlay = modal.shadowRoot.querySelector('.overlay');
+
+                // Data bindings will stamp out new DOM asynchronously
+                // so wait to check for updates
+                flush(function () {
+                    overlay.click();
+                    assert.equal( modal.active, false);
+                    done();
+                });
+            });
+
+            test('closes on escape key', done => {
+                modal.active = true;
+                
+                // Data bindings will stamp out new DOM asynchronously
+                // so wait to check for updates
+                flush(function () {
+                    document.dispatchEvent(new KeyboardEvent("keydown", {
+                        bubbles : true,
+                        cancelable : true,
+                        key : "Esc",
+                        keyCode : 27
+                    }));
+
+                    assert.equal( modal.active, false);
+                    done();
+                });
+            });
+
+            test('does not close on overlay tap or escape key if noExit true', done => {
+                modal.active = true;
+                modal.noExit = true;
+                const overlay = modal.shadowRoot.querySelector('.overlay');
+                
+                // Data bindings will stamp out new DOM asynchronously
+                // so wait to check for updates
+                flush(function () {
+                    overlay.click();
+                    document.dispatchEvent(new KeyboardEvent("keydown", {
+                        bubbles : true,
+                        cancelable : true,
+                        key : "Esc",
+                        keyCode : 27
+                    }));
+
+                    assert.equal( modal.active, true);
+                    done();
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+# TODO
+version: '3'
+services:
+  rxspacer:
+    image: nginx:1.15.7-alpine
+    ports:
+      - 9000:80
+    volumes:
+      - ./build/es5-bundled:/usr/share/nginx/html
+    restart: always

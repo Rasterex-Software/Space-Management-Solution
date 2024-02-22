@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Rasterex Spacer Button</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../node_modules/chai/chai.js"></script>
+    <script src="../../node_modules/mocha/mocha.js"></script>
+    <script src="../../node_modules/wct-mocha/wct-mocha.js"></script>
+</head>
+
+<body>
+    <test-fixture id="basic">
+        <template>
+            <rx-spacer-button>Button 1</rx-spacer-button>
+        </template>
+    </test-fixture>
+
+    <script type="module">
+        import '@polymer/test-fixture';
+        import '../../src/rx-spacer-button.js';
+
+        suite('rx-spacer-button tests', function() {
+            let button;
+
+            setup(function () {
+                button = fixture('basic');
+
+                // Make tests wait until elements are rendered.
+                return button.updateComplete;
+            });
+
+            test('default: role button', function () {
+                assert.equal(button.getAttribute('role'), 'button');
+            });
+
+            test('can be disabled imperatively', function (done) {
+                button.disabled = true;
+               
+                // Data bindings will stamp out new DOM asynchronously
+                // so wait to check for updates
+                flush(function () {
+                    assert.equal(button.hasAttribute('disabled'), true);
+                    done();
+                });
+            });
+
+            test('clicking on the button fires click event', done => {
+                button.addEventListener('click', () => {
+                    done();
+                });
+                button.click();
+            });
+
+            test('on down should have active attribute', () => {
+                button.dispatchEvent(new CustomEvent('down'));
+
+                assert.equal(button.hasAttribute('active'), true);
+            });
+
+            test('on up should not have active attribute', () => {
+                button.dispatchEvent(new CustomEvent('down'));
+
+                button.dispatchEvent(new CustomEvent('up'));
+
+                assert.equal(button.hasAttribute('active'), false);
+            });
+
+            test('when disabled should not have active attribute', done => {
+                button.disabled = true;
+            
+                // Data bindings will stamp out new DOM asynchronously
+                // so wait to check for updates
+                flush(function () {
+                    button.dispatchEvent(new CustomEvent('down'));
+                    assert.equal(button.hasAttribute('active'), false);
+                    done();
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

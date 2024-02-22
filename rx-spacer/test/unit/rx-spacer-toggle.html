@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>rx-spacer-toggle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../node_modules/chai/chai.js"></script>
+    <script src="../../node_modules/mocha/mocha.js"></script>
+    <script src="../../node_modules/wct-mocha/wct-mocha.js"></script>
+</head>
+
+<body>
+    <test-fixture id="basic">
+        <template>
+            <rx-spacer-toggle>Toggle</rx-spacer-toggle>
+        </template>
+    </test-fixture>
+
+    <script type="module">
+        import '@polymer/test-fixture';
+        import '../../src/rx-spacer-toggle.js';
+
+        suite('rx-spacer-toggle tests', function () {
+            let toggle;
+
+            setup(function () {
+                toggle = fixture('basic');
+
+                // Make tests wait until elements are rendered.
+                return Promise.all([toggle.updateComplete]);
+            });
+
+            test('default: role button', function () {
+                assert.equal(toggle.getAttribute('role'), 'button');
+            });
+
+            test('default: not disabled ', function () {
+                assert.equal(toggle.getAttribute('disabled'), null);
+            });
+
+            test('changes pressed state when clicked', function () {
+                assert.equal(toggle.pressed, false);
+                toggle.click();
+                assert.equal(toggle.pressed, true);
+            });
+
+            test('when disabled should not change pressed state when clicked', function () {
+                toggle.disabled = true;
+                assert.equal(toggle.pressed, false);
+                toggle.click();
+                assert.equal(toggle.pressed, false);
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <link rel="icon" href="images/favicon.ico">
+
+  <!-- Register service worker if supported. -->
+  <!--
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js');
+      }
+    </script>
+    -->
+
+  <!-- Load polyfills -->
+  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js" defer>
+  </script>
+
+  <script src="node_modules/pure-uuid/uuid.js" defer></script>
+
+  <!-- Load components via WebComponents.waitFor -->
+  <script type="module">
+    window.WebComponents = window.WebComponents || {
+      waitFor(cb) { addEventListener('WebComponentsReady', cb) }
+    }
+    WebComponents.waitFor(async () => {
+      import('./src/base-components/rx-spacer-button.js');
+      import('./src/rx-spacer-upload.js');
+      import('./src/rx-spacer-area-info.js');
+      import('./src/rx-spacer-clear-spacing.js');
+      import('./src/rx-spacer-calibrate.js');
+      import('./src/rx-spacer-settings.js');
+      import('./src/rx-spacer.js');
+    });
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      /* This is a font-stack that tries to use the system-default sans-serifs first */
+      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    header {
+      width: 100%;
+      background-color: #333c4e;
+      color: #293237;
+      border-bottom: 1px solid #eee;
+      height: 64px;
+      padding-top: 16px;
+    }
+
+    header .logo {
+      height: 32px;
+      margin-left: 10px;
+      float: left;
+    }
+
+    .wrapper {
+      display: flex;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      padding-left: 15px;
+      padding-right: 15px;
+      width: 450px;
+    }
+
+    .gutter {
+      width: 6px;
+      background-color: black;
+      z-index: 10;
+      /* cursor: col-resize; */
+    }
+
+    /* RxCore start*/
+    #rxcontainer {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: block;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      float: left;
+    }
+
+    #rxcanvas {
+      display: block;
+    }
+
+    #imageDisp {
+      position: absolute;
+      top: 1px;
+      left: 1px;
+    }
+
+    #imageTemp {
+      position: absolute;
+      top: 1px;
+      left: 1px;
+    }
+
+    #canv3D {
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      background: -webkit-linear-gradient(#FFFFFF, #b5b5b5);
+      /* For Safari 5.1 to 6.0 */
+      background: -o-linear-gradient(#FFFFFF, #b5b5b5);
+      /* For Opera 11.1 to 12.0 */
+      background: -moz-linear-gradient(#FFFFFF, #b5b5b5);
+      /* For Firefox 3.6 to 15 */
+      background: linear-gradient(#FFFFFF, #b5b5b5);
+      /* Standard syntax */
+    }
+
+    #imagemag {
+      position: absolute;
+      top: 1px;
+      left: 1px;
+    }
+  </style>
+
+  <!-- Change stuff here for your app -->
+  <meta name="description" content="rx-spacer">
+  <meta name="theme-color" content="#ffffff">
+  <title>rx-spacer</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <img class="logo" src="images/rasterex_logo.png" alt="Rasterex Logo">
+  </header>
+
+  <div class="wrapper">
+    <aside class="sidebar">
+      <h2>Rx Spacer Tool</h2>
+      <rx-spacer-upload></rx-spacer-upload>
+      <br><br>
+      <rx-spacer-button onclick="RxCore.openFile(RxConfig.baseFileURL + '110_01.dwg');">Load Demo File</rx-spacer-button>
+      <br><br>
+      <rx-spacer-button onclick="RxCore.pickPolygon(true)">Pick Area</rx-spacer-button>
+      <br><br>
+      <rx-spacer-clear-spacing></rx-spacer-clear-spacing>
+
+      <p>Click on the button bellow to toggle Rasterex spacing tool</p>
+      <rx-spacer debug show-loader show-create-modal></rx-spacer>
+
+      <br><br>
+      <hr>
+      <h3>Areas</h3>
+      <rx-spacer-settings></rx-spacer-settings>
+      <rx-spacer-button id="settings-button"> Settings</rx-spacer-button>  &nbsp;
+      <rx-spacer-calibrate></rx-spacer-calibrate>
+      <rx-spacer-area-list></rx-spacer-area-list>
+    </aside>
+    <div class="gutter"></div>
+
+    <main role="main" class="main-content">
+      <div id="rxcontainer">
+        <rx-spacer-area-actions id="area-actions"></rx-spacer-area-actions>
+        <!-- <rx-spacer-area-info hook-fields='[{"name": "extraField", "value": "Extra Value"}]'></rx-spacer-area-info> -->
+      </div>
+    </main>
+  </div>
+
+  <footer>
+
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.87/compatibility.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.87/pdf.js"></script>
+  <script src="https://stage.fm.rasterex.demo2.nordlogic.com/libs/pdfjs/viewer.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/97/three.js"></script>
+  <script src="rxconfig.js"></script>
+  <script src="https://stage.fm.rasterex.demo2.nordlogic.com/libs/rxcorefunctions/rxcorefunctions.27.8.js"></script>
+
+  <script>
+    RxCore.initialize({
+      offsetWidth: 456,
+      offsetHeight: 65,
+    });
+
+    var settingsButton = document.querySelector('#settings-button');
+    settingsButton.addEventListener('click', function() {
+        document.querySelector('rx-spacer-settings').toggleModal();
+    })
+  </script>
+</body>
+
+</html>

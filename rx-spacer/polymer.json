@@ -1,0 +1,33 @@
+{
+  "shell": "src/rx-spacer.js",
+  "entrypoint": "index.html",
+  "fragments": [],
+  "npm": true,
+  "moduleResolution": "node",
+  "sources": [
+    "images/**/*"
+  ],
+  "extraDependencies": [
+    "node_modules/@webcomponents/webcomponentsjs/**",
+    "images/**/*"
+  ],
+  "builds": [{
+    "name": "es6-bundled",
+    "browserCapabilities": [
+      "es2015"
+    ],
+    "js": {
+      "compile": "es2015",
+      "minify": true,
+      "transformModulesToAmd": true
+    },
+    "css": {
+      "minify": true
+    },
+    "html": {
+      "minify": true
+    },
+    "bundle": true,
+    "addServiceWorker": true
+  }]
+}

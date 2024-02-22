@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>rx-spacer-popover</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../node_modules/chai/chai.js"></script>
+    <script src="../../node_modules/mocha/mocha.js"></script>
+    <script src="../../node_modules/wct-mocha/wct-mocha.js"></script>
+</head>
+
+<body>
+    <test-fixture id="basic">
+        <template>
+            <rx-spacer-popover>
+                <div slot="handle" id="handleButton">Expand</div>
+                <div slot="expandable" id="expandableContent">Expanded</div>
+            </rx-spacer-popover>
+        </template>
+    </test-fixture>
+
+    <script type="module">
+        import '@polymer/test-fixture';
+        import '../../src/rx-spacer-popover.js';
+
+        suite('rx-spacer-popover tests', function () {
+            let popover;
+
+            setup(function () {
+                popover = fixture('basic');
+                // Make tests wait until elements are rendered.
+                return Promise.all([popover.updateComplete]);
+            });
+
+            test("expandable content should be invisible by default", function () {
+                assert.equal(popover.expandable.offsetParent , null)
+                assert.equal(popover.expanded , false)
+            });
+
+            test("expandable content should show after clicking the handle", function () {
+                // control test
+                assert.equal(popover.expandable.offsetParent , null)
+                assert.equal(popover.expanded , false)
+                // do it
+                popover.handle.click();
+                // real test
+                assert.notEqual(popover.expandable.offsetParent , null)
+                assert.equal(popover.expanded , true)
+            });
+
+            test("expandable content should hide after clicking the handle again", function () {
+                // control test
+                assert.equal(popover.expandable.offsetParent , null)
+                assert.equal(popover.expanded , false)
+                // show it
+                popover.handle.click();
+                // should be shown now
+                assert.notEqual(popover.expandable.offsetParent , null)
+                assert.equal(popover.expanded , true)
+                // hide it
+                popover.handle.click();
+                // real test, should be hidden now
+                assert.equal(popover.expandable.offsetParent , null)
+                assert.equal(popover.expanded , false)
+            });
+
+            test('clicking on the handle fires expanded-changed event', done => {
+                popover.addEventListener('expanded-changed', () => {
+                    done();
+                });
+                popover.handle.click();
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+{
+  "suites": ["test/unit"],
+  "plugins": {
+    "local": {
+      "browsers": [
+        "chrome"
+      ],
+      "browserOptions": {
+        "chrome": [
+          "headless",
+          "disable-gpu"
+        ]
+      }
+    }
+  }
+}
