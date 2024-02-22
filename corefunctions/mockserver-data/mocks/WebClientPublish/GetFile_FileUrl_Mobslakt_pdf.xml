@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RxViewServer>
+    <FileData>
+        <FileInformation>
+            <Version>1</Version>
+            <NumPages>1</NumPages>
+            <NumLayouts>1</NumLayouts>
+            <FileName>C:\Rasterex\RxView360Server\bin\cache\040915 mobslakt-1f601-31415104\040915 mobslakt-1f601-31415104.pdf</FileName>
+            <FileNameSRC>/cache/040915 mobslakt-1f601-31415104/040915 mobslakt-1f601-31415104.pdf</FileNameSRC>
+            <OriginalURL>C:\Rasterex\RxView360Server\bin\cache\040915 mobslakt-1f601-31415104\040915 mobslakt-1f601-31415104.pdf</OriginalURL>
+            <Format>Adobe PDF 1.3</Format>
+            <Filter>RxFilterDynaPDF</Filter>
+            <FileSizeLow>128513</FileSizeLow>
+            <FileSizeHigh>0</FileSizeHigh>
+            <Type>0</Type>
+            <PublisherVersion>18.0.0.119</PublisherVersion>
+            <ImageFormat>Portable Network Graphics Format</ImageFormat>
+            <SmallBitmapSize>1280</SmallBitmapSize>
+            <ThumbnailSize>160</ThumbnailSize>
+        </FileInformation>
+        <Layouts>
+            <Layout>
+                <LayoutName>Default</LayoutName>
+                <Pages>
+                    <Page>
+                        <PageName>Page 1</PageName>
+                        <Compression>---</Compression>
+                        <DPI>600</DPI>
+                        <Width>14033.33333333</Width>
+                        <Height>19833.33333333</Height>
+                        <OffsetX>0.00000000</OffsetX>
+                        <OffsetY>0.00000000</OffsetY>
+                        <OriginalScale>1.00000000</OriginalScale>
+                        <ThumbnailImageSRC>/cache/040915 mobslakt-1f601-31415104/1_1T.PNG</ThumbnailImageSRC>
+                        <MainImageWidth>4000</MainImageWidth>
+                        <MainImageHeight>5654</MainImageHeight>
+                        <MainImageScaling>0.28503563</MainImageScaling>
+                        <MainImageOffsetX>0.00000000</MainImageOffsetX>
+                        <MainImageOffsetY>0.00000000</MainImageOffsetY>
+                        <ThumbnailWidth>160</ThumbnailWidth>
+                        <ThumbnailHeight>226</ThumbnailHeight>
+                    </Page>
+                </Pages>
+            </Layout>
+        </Layouts>
+    </FileData>
+</RxViewServer>

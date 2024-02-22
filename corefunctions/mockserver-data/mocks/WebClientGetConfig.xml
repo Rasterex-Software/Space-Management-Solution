@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <!--<Context>testconfig</Context>-->
+    <!--<Licensemode>Normal</Licensemode>-->
+    <ImgSwitchFactor>2.0</ImgSwitchFactor>
+    <CurrentUserName>Demo</CurrentUserName>
+    <DisplayName>Demo User</DisplayName>
+    <MarkupLayer>5</MarkupLayer>
+    <MarkupColor>#a52a2a</MarkupColor>
+    <!--<XmlUrl>http://viewserver.rasterex.com/RxBinweb/RxCSISAPI.dll?WebClientPublish</XmlUrl>-->
+    <!--<XmlUrlRel>http://viewserver.rasterex.com/RxBinweb</XmlUrlRel>-->
+    <!--<MarkupSaveUrl>http://viewserver.rasterex.com/RxBinweb/RxCSISAPI.dll?WebClientSaveMarkup</MarkupSaveUrl>-->
+    <PrintPageURL>printcanvas.htm</PrintPageURL>
+    <EnableMarkupEdit>True</EnableMarkupEdit>
+    <CanConsolidate>False</CanConsolidate>
+    <CanChangeSignature>False</CanChangeSignature>
+    <CanChangeLayer>True</CanChangeLayer>
+    <Readonlymarkup>False</Readonlymarkup>
+    <EnableFileOpen>True</EnableFileOpen>
+    <ReverseScale>True</ReverseScale>
+    <InitialDocument></InitialDocument>
+    <!--<InitialDocument><%=Request.QueryString("URL")%></InitialDocument>-->
+    <RefreshMarkup>False</RefreshMarkup>
+    <stamps>
+        <stamp>Approved</stamp>
+        <stamp>Draft</stamp>
+        <stamp>Received</stamp>
+        <stamp>Rejected</stamp>
+        <stamp>Reviewed</stamp>
+        <stamp>Revised</stamp>
+    </stamps>
+    <layers>
+        <layer>
+            <name>Layer 0</name>
+            <color>#ffffff</color>
+            <number>0</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 1</name>
+            <color>#ff0000</color>
+            <number>1</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 2</name>
+            <color>#0000ff</color>
+            <number>2</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 3</name>
+            <color>#008000</color>
+            <number>3</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 4</name>
+            <color>#ffff00</color>
+            <number>4</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 5</name>
+            <color>#a52a2a</color>
+            <number>5</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 6</name>
+            <color>#ffd700</color>
+            <number>6</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 7</name>
+            <color>#fff5ee</color>
+            <number>7</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 8</name>
+            <color>#fff8dc</color>
+            <number>8</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 9</name>
+            <color>#fffacd</color>
+            <number>9</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 10</name>
+            <color>#ffffe0</color>
+            <number>10</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 11</name>
+            <color>#98fb98</color>
+            <number>11</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 12</name>
+            <color>#afeeee</color>
+            <number>12</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 13</name>
+            <color>#e0ffff</color>
+            <number>13</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 14</name>
+            <color>#e6e6fa</color>
+            <number>14</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 15</name>
+            <color>#dda0dd</color>
+            <number>15</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 16</name>
+            <color>#d3d3d3</color>
+            <number>16</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 17</name>
+            <color>#ffc0cb</color>
+            <number>17</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 18</name>
+            <color>#ffe4c4</color>
+            <number>18</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 19</name>
+            <color>#ffe4b5</color>
+            <number>19</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 20</name>
+            <color>#f0e68c</color>
+            <number>20</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 21</name>
+            <color>#90ee90</color>
+            <number>21</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 22</name>
+            <color>#20b2aa</color>
+            <number>22</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 23</name>
+            <color>#87cefa</color>
+            <number>23</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 24</name>
+            <color>#6495ed</color>
+            <number>24</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 25</name>
+            <color>#ee82ee</color>
+            <number>25</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 26</name>
+            <color>#c0c0c0</color>
+            <number>26</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 27</name>
+            <color>#f08080</color>
+            <number>27</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 28</name>
+            <color>#f4a460</color>
+            <number>28</number>
+            <state>on</state>
+        </layer>
+        <layer>
+            <name>Layer 29</name>
+            <color>#000000</color>
+            <number>29</number>
+            <state>on</state>
+        </layer>
+    </layers>
+</Configuration>
