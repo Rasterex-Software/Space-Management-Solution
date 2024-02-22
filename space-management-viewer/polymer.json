@@ -1,0 +1,38 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/components/sm-app.js",
+  "sources": [
+    "images/**/*"
+  ],
+  "extraDependencies": [
+    "node_modules/@webcomponents/webcomponentsjs/**",
+    "node_modules/pure-uuid/**",
+    "libs/**",
+    "assets/**",
+    "welcome.jpg"
+  ],
+  "builds": [
+    {
+      "name": "es6-unbundled",
+      "browserCapabilities": [
+        "es2015"
+      ],
+      "js": {
+        "compile": "es2015",
+        "minify": true,
+        "transformModulesToAmd": true
+      },
+      "css": {
+        "minify": true
+      },
+      "html": {
+        "minify": true
+      },
+      "bundle": false,
+      "addServiceWorker": false,
+      "basePath": ""
+    }
+  ],
+  "moduleResolution": "node",
+  "npm": true
+}

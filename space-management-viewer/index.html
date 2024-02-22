@@ -1,0 +1,131 @@
+<!--
+@license
+Copyright (c) 2018 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Rasterex Space Management</title>
+  <meta name="generator" content="PWA Starter Kit">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Rasterex Space Management description">
+
+  <!--
+      The `<base>` tag below is present to support two advanced deployment options:
+      1) Differential serving. 2) Serving from a non-root path.
+
+      Instead of manually editing the `<base>` tag yourself, you should generally either:
+      a) Add a `basePath` property to the build configuration in your `polymer.json`.
+      b) Use the `--base-path` command-line option for `polymer build`.
+    -->
+  <base href="/">
+
+  <link rel="icon" href="images/favicon.ico">
+
+  <!-- See https://goo.gl/qRE0vM -->
+  <meta name="theme-color" content="#3f51b5">
+
+  <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Rasterex Space Management">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Rasterex Space Management">
+
+  <!-- Homescreen icons -->
+  <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/icon-96x96.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/icon-192x192.png">
+
+  <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#3f51b5">
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <!-- Default twitter cards -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@username">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="sm-app">
+  <meta property="og:image" content="images/manifest/icon-144x144.png" />
+
+  <!-- Performance tip: hint to the browser to start the handshake for the fonts site -->
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <script>
+    // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
+    // https://github.com/reactjs/redux/issues/2907
+    window.process = { env: { NODE_ENV: 'production' } };
+
+    // window.SM_API_URL = "http://localhost:3000";
+  </script>
+
+  <!-- Add any global styles for body, document, etc. -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <!-- <link rel="stylesheet" type="text/css" href="libs/jquery-datatables/jquery.dataTables.1.0.19.min.css" > -->
+  <!-- <link rel="stylesheet" type="text/css"  href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> -->
+
+  <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+</head>
+
+<body>
+      <!-- <div class="ui-layout-center">Center</div>
+      <div class="ui-layout-south">Bottom</div>
+      <div class="ui-layout-west">Left</div> -->
+  <sm-app appTitle="Rasterex Space Management"></sm-app>
+  <noscript>
+    Please enable JavaScript to view this website.
+  </noscript>
+
+
+  <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
+  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+  <script src="node_modules/pure-uuid/uuid.js" defer></script>
+
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.87/compatibility.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.87/pdf.js"></script> -->
+  <script src="libs/pdfjs/pdf.js"></script>
+  <script src="libs/pdfjs/pdf.worker.js"></script>
+  <script src="libs/pdfjs/viewer.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/97/three.js"></script>
+  <!-- <script src="https://unpkg.com/split.js/dist/split.min.js"></script> -->
+
+  <script src="libs/rxcorefunctions/rxconfig.js"></script>
+  <script src="libs/rxcorefunctions/rxcorefunctions.27.8.js"></script>
+  <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+  <script>
+
+    // axiosInstance = axios.create({
+    //   baseURL: window.SM_API_URL
+    //   // ,
+    //   // timeout: 1000
+    // });
+  </script>
+  <!-- Built with love using PWA Starter Kit -->
+  <script type="module" src="src/components/sm-app.js"></script>
+</body>
+
+</html>
