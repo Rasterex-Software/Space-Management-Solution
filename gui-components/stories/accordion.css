@@ -1,0 +1,19 @@
+
+/* Headings need a background color so they are not transparent. Otherwise
+the content will shine through during the animation. */
+rasterex-accordion-heading {
+    background-color: white;
+    border: 1px solid #d3d3d3;
+}
+rasterex-accordion-heading {
+    background-color: white;
+    border: 1px solid #d3d3d3;
+}
+rasterex-accordion-heading[expanded] {
+    background-color: #2196F3;
+    --heading-color: #fff;
+}
+rasterex-accordion-panel {
+    padding: 20px;
+    background-color: #f1f1f1;
+}

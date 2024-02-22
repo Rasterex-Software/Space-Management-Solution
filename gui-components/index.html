@@ -1,0 +1,117 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="demo.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <rasterex-slider></rasterex-slider>
+
+    <div style="width:300px; margin-top:30px">
+      <rasterex-legend title="Legend" show>
+        <ul>
+          <li class="item">item 1</li>
+          <li class="item">item 2</li>
+          <li class="item">item 3</li>
+          <li class="item">item 4</li>
+          <li class="item">item 5</li>
+        </ul>
+      </rasterex-legend>
+    </div>
+
+    <div style="width:300px; margin-top:30px">
+      <rasterex-color-picker color="#ff5722"></rasterex-color-picker>
+    </div>
+
+    <div style="width:300px; margin-top:30px">
+      <rasterex-listbox selected="two">
+        <rasterex-item value="one">First item</rasterex-item>
+        <rasterex-item value="two">Second Item</rasterex-item>
+        <rasterex-item value="three">Three item</rasterex-item>
+        <rasterex-item value="four">Four Item</rasterex-item>
+      </rasterex-listbox>
+    </div>
+
+    <div style="width:300px; margin-top:30px">
+      <rasterex-tabs draggable collapsible>
+        <rasterex-tab dismiss>Tab 1</rasterex-tab>
+        <rasterex-tabpanel>Content 1</rasterex-tabpanel>
+        <rasterex-tab dismiss>Tab 2</rasterex-tab>
+        <rasterex-tabpanel>Content 2</rasterex-tabpanel>
+        <rasterex-tab dismiss>Tab 3</rasterex-tab>
+        <rasterex-tabpanel>Content 3</rasterex-tabpanel>
+      </rasterex-tabs>
+    </div>
+
+    <div style="width:300px; margin-top:30px">
+      <rasterex-accordion>
+        <rasterex-accordion-heading>Heading 1</rasterex-accordion-heading>
+        <rasterex-accordion-panel>Content 1</rasterex-accordion-panel>
+        <rasterex-accordion-heading>Heading 2</rasterex-accordion-heading>
+        <rasterex-accordion-panel>Content 2</rasterex-accordion-panel>
+        <rasterex-accordion-heading>Heading 3</rasterex-accordion-heading>
+        <rasterex-accordion-panel>Content 3</rasterex-accordion-panel>
+      </rasterex-accordion>
+    </div>
+
+    <div style="width:300px; margin-top:30px">
+      <rasterex-tree-view id="tree-view"></rasterex-tree-view>
+      <script>
+
+        var tree = document.querySelector('#tree-view');
+    
+        // Some children.
+        tree.data = {
+            "name": "Hello",
+            "icon": "folder",
+            "children": [{
+                "name": "World"
+            }, {
+                "name": "There"
+            }, {
+                "name": "You"
+            }, {
+                "name": "Are"
+            }]
+        };
+    </script>
+    
+
+    </div>
+  </div>
+
+  <!-- Polyfills required for browser compatibility on StackBlitz -->
+  <script src="/node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+  <!-- Tabs -->
+  <script type="module" src="dist/components/tabs/rasterex-tabs.js"></script>
+  <script type="module" src="dist/components/tabs/rasterex-tab.js"></script>
+  <script type="module" src="dist/components/tabs/rasterex-tabpanel.js"></script>
+
+  <!-- Accordion -->
+  <script type="module" src="dist/components/accordion/rasterex-accordion.js"></script>
+  <script type="module" src="dist/components/accordion/rasterex-accordion-panel.js"></script>
+  <script type="module" src="dist/components/accordion/rasterex-accordion-heading.js"></script>
+
+  <!-- Slider -->
+  <script type="module" src="dist/components/slider/rasterex-slider.js"></script>
+
+  <!-- List -->
+  <script type="module" src="dist/components/list/rasterex-listbox.js"></script>
+  <script type="module" src="dist/components/list/rasterex-item.js"></script>
+
+  <!-- Color picker -->
+  <script type="module" src="dist/components/color-picker/rasterex-color-picker.js"></script>
+
+  <!-- Button -->
+  <script type="module" src="dist/components/toggle-button/rasterex-toggle-button.js"></script>
+
+  <!-- Tree View -->
+  <script type="module" src="dist/components/tree-view/rasterex-tree-view.js"></script>
+  <script type="module" src="dist/components/tree-view/rasterex-tree-view-node.js"></script>
+
+  <!-- Legend -->
+  <script type="module" src="dist/components/legend/rasterex-legend.js"></script>
+
+</body>

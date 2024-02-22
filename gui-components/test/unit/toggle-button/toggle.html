@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>rasterex-toggle-button</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="../../../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../../node_modules/chai/chai.js"></script>
+    <script src="../../../node_modules/mocha/mocha.js"></script>
+    <script src="../../../node_modules/wct-mocha/wct-mocha.js"></script>
+</head>
+
+<body>
+    <test-fixture id="f1">
+        <template>
+            <rasterex-toggle-button>Button 1</rasterex-toggle-button>
+        </template>
+    </test-fixture>
+
+    <!-- <test-fixture id="f2">
+        <template>
+            <rasterex-toggle-button disabled>Button 2</rasterex-toggle-button>
+        </template>
+    </test-fixture> -->
+
+
+    <script type="module">
+        import '@polymer/test-fixture';
+        import 'axe-core/axe.min.js';
+        import { axeReport } from 'pwa-helpers/axe-report.js';
+        import '../../../dist/components/toggle-button/rasterex-toggle-button.js';
+
+        suite('rasterex-toggle-button tests', function () {
+            let toggle;
+
+            setup(function () {
+                toggle = fixture('f1');
+
+                // Make tests wait until elements are rendered.
+                return Promise.all([toggle.updateComplete]);
+            });
+
+            test('default: role button', function () {
+                assert.equal(toggle.role, 'button');
+                assert.equal(toggle.getAttribute('role'), 'button');
+            });
+
+            test('default: not disabled ', function () {
+                assert.equal(toggle.disabled, false);
+                assert.equal(toggle.getAttribute('disabled'), null);
+            });
+
+            test('default: not pressed', function () {
+                assert.equal(toggle.pressed, false);
+                assert.equal(toggle.getAttribute('pressed'), null);
+            });
+
+            test('default: no icon', function () {
+                assert.equal(toggle.hasIcon, false);
+            });
+
+            test('changes pressed state when clicked', function () {
+                assert.equal(toggle.pressed, false);
+                toggle.click();
+                assert.equal(toggle.pressed, true);
+            });
+
+            test('a11y', function () {
+                return axeReport(toggle);
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Tests</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../../node_modules/mocha/mocha.js"></script>
+  <script src="../../node_modules/wct-mocha/wct-mocha.js"></script>
+</head>
+
+<body>
+  <script>
+    WCT.loadSuites([
+      // Load test suite
+      'accordion/accordion-panel.html',
+      'accordion/accordion-heading.html',
+      'accordion/accordion.html',
+      'color-picker/color-picker.html',
+      'list/list.html',
+      'slider/slider.html',
+      'tabs/tabpanel.html',
+      'tabs/tab.html',
+      'tabs/tabs.html',
+      'toggle-button/toggle.html',
+      'tree-view/tree-view.html',
+      'tree-view/tree-view-node.html'
+    ]);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+rasterex-tab {
+    border-style: solid;
+    border-color: #d3d3d3;
+    border-width: 1px 1px 0px 1px;
+    padding: 10px;
+}
+rasterex-tabpanel {
+    padding: 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #d3d3d3;
+}
+rasterex-tab[selected] {
+    background-color: #2196F3;
+    color: #fff;
+}
+rasterex-tab[selected] svg {
+    fill: #fff;
+}
+
+
+/* Headings need a background color so they are not transparent. Otherwise
+the content will shine through during the animation. */
+rasterex-accordion-heading {
+    background-color: white;
+    border: 1px solid #d3d3d3;
+}
+rasterex-accordion-heading {
+    background-color: white;
+    border: 1px solid #d3d3d3;
+}
+rasterex-accordion-heading[expanded] {
+    background-color: #2196F3;
+    --heading-color: #fff;
+}
+rasterex-accordion-panel {
+    padding: 20px;
+    background-color: #f1f1f1;
+}
+
+/**
+* If JavaScript does not run, the element will not match `:defined`.
+* In that case this style adds spacing between tabs and previous panel.
+*/
+rasterex-tabs:not(:defined), rasterex-tab:not(:defined), rasterex-tabpanel:not(:defined) {
+    display: none;
+}
+rasterex-accordion:not(:defined), rasterex-accordion-heading:not(:defined), rasterex-accordion-panel:not(:defined) {
+    display: none;
+}
+
+rasterex-legend:not(:defined), rasterex-listbox:not(:defined) {
+    display: none;
+}

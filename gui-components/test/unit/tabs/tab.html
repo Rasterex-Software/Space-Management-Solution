@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>rasterex-tab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="../../../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../../node_modules/chai/chai.js"></script>
+    <script src="../../../node_modules/mocha/mocha.js"></script>
+    <script src="../../../node_modules/wct-mocha/wct-mocha.js"></script>
+</head>
+
+<body>
+    <test-fixture id="basic">
+        <template>
+            <rasterex-tabs>
+                <rasterex-tab>Tab 1</rasterex-tab>
+                <rasterex-tabpanel>Content</rasterex-tabpanel>
+            </rasterex-tabs>
+        </template>
+    </test-fixture>
+
+    <script type="module">
+        import '@polymer/test-fixture';
+        import 'axe-core/axe.min.js';
+        import { axeReport } from 'pwa-helpers/axe-report.js';
+        import '../../../dist/components/tabs/rasterex-tab.js';
+        import '../../../dist/components/tabs/rasterex-tabs.js';
+        import '../../../dist/components/tabs/rasterex-tabpanel.js';
+
+        suite('rasterex-tab tests', function () {
+            let tabs;
+            let tab;
+            let panel;
+            setup(function () {
+                tabs = fixture('basic');
+                tab = tabs.querySelector('rasterex-tab');
+                panel = tabs.querySelector('rasterex-tabpanel');
+                // Make tests wait until elements are rendered.
+                return Promise.all([tab.updateComplete, panel.updateComplete, tabs.updateComplete]);
+            });
+
+            test('should set default role', function () {
+                assert.equal(tab.role, 'tab');
+            });
+
+            test('should set default selected', function () {
+                assert.equal(tab.selected, true);
+            });
+
+            test('should set default aria-selected', function () {
+                assert.equal(tab.ariaSelected, 'true');
+            });
+
+            test('should set default tabindex', function () {
+                assert.equal(tab.tabindex, 0);
+            });
+
+            test('should set default dismiss', function () {
+                assert.equal(tab.dismiss, false);
+            });
+
+            test('should know about related panel when calling `relatedPanel()`', function () {
+                const relatedPanel = tab.relatedPanel();
+                assert.equal(relatedPanel, panel);
+            });
+
+            test('should remove when calling `dismisHandler()`', function () {
+                const mockedMouseEvent = document.createEvent('MouseEvent')
+                tab.dismissHandler(mockedMouseEvent);
+                assert.equal(tabs.querySelector('rasterex-tab'), null);
+                assert.equal(tabs.querySelector('rasterex-tabpanel'), null);
+            });
+
+            test('a11y', function () {
+                return axeReport(tabs);
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>rasterex-slider</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="../../../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../../node_modules/chai/chai.js"></script>
+    <script src="../../../node_modules/mocha/mocha.js"></script>
+    <script src="../../../node_modules/wct-mocha/wct-mocha.js"></script>
+</head>
+
+<body>
+    <test-fixture id="basic">
+        <template>
+            <rasterex-slider></rasterex-slider>
+        </template>
+    </test-fixture>
+
+    <script type="module">
+        import '@polymer/test-fixture';
+        import 'axe-core/axe.min.js';
+        import { axeReport } from 'pwa-helpers/axe-report.js';
+        import '../../../dist/components/slider/rasterex-slider.js';
+
+        suite('rasterex-slider tests', function () {
+            let slider;
+            setup(function () {
+                slider = fixture('basic');
+
+                // Make tests wait until element is rendered.
+                return slider.updateComplete;
+            });
+            
+            test('should set default value', function () {
+                assert.equal(slider.value, 0);
+            });
+
+            test('should set custom value', function () {
+                slider.setAttribute('value', 20);
+                assert.equal(slider.value, 20);
+            });
+
+            test('should only accept values between min and max', function () {
+                slider.setAttribute('value', 120);
+                assert.equal(slider.value, slider.max);
+            });
+
+            test('should set default min', function () {
+                assert.equal(slider.min, 0);
+            });
+
+            test('should set custom min', function () {
+                slider.setAttribute('min', 20);
+                assert.equal(slider.min, 20);
+            });
+
+            test('should set default max', function () {
+                assert.equal(slider.max, 100);
+            });
+
+            test('should set custom max', function () {
+                slider.setAttribute('max', 200);
+                assert.equal(slider.max, 200);
+            });
+
+            test('should set default role', function () {
+                assert.equal(slider.getAttribute('role'), 'slider');
+            });
+
+            test('should set default aria-valuemin', function () {
+                assert.equal(slider.getAttribute('aria-valuemin'), '0');
+            });
+
+            test('should set default aria-valuemax', function () {
+                assert.equal(slider.getAttribute('aria-valuemax'), '100');
+            });
+
+            test('should increment value when calling `increment`', function () {
+                const currentValue = slider.value;
+                slider.increment();
+                assert.isAbove(slider.value, currentValue)
+            });
+
+            test('should decrement value when calling `decrement`', function () {
+                slider.setAttribute('value', 10);
+                const currentValue = slider.value;
+                slider.decrement();
+                assert.isBelow(slider.value, currentValue)
+            });
+
+            test('should fire `change` event when value is changed', function () {
+                slider.addEventListener('change', function (event) {
+                    assert.equal(event.detail.value, slider.value);
+                });
+
+                slider.setAttribute('value', 10);
+                slider.value = 10;
+            });
+
+            test('a11y', function () {
+                return axeReport(slider);
+            });
+        });
+    </script>
+</body>
+
+</html>

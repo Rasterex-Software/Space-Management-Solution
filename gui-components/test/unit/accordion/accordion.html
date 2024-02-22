@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>rasterex-accordion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="../../../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../../node_modules/chai/chai.js"></script>
+    <script src="../../../node_modules/mocha/mocha.js"></script>
+    <script src="../../../node_modules/wct-mocha/wct-mocha.js"></script>
+</head>
+
+<body>
+    <test-fixture id="basic">
+        <template>
+            <rasterex-accordion>
+                <rasterex-accordion-heading id="demo-id" aria-level="1">Heading 1</rasterex-accordion-heading>
+                <rasterex-accordion-panel>Content 1</rasterex-accordion-panel>
+                <rasterex-accordion-heading aria-level="1">Heading 2</rasterex-accordion-heading>
+                <rasterex-accordion-panel>Content 2</rasterex-accordion-panel>
+                <rasterex-accordion-heading aria-level="1">Heading 3</rasterex-accordion-heading>
+                <rasterex-accordion-panel>Content 3</rasterex-accordion-panel>
+            </rasterex-accordion>
+        </template>
+    </test-fixture>
+
+    <script type="module">
+        import '@polymer/test-fixture';
+        import 'axe-core/axe.min.js';
+        import { axeReport } from 'pwa-helpers/axe-report.js';
+        import '../../../dist/components/accordion/rasterex-accordion-heading.js';
+        import '../../../dist/components/accordion/rasterex-accordion-panel.js';
+        import '../../../dist/components/accordion/rasterex-accordion.js';
+
+        suite('rasterex-accordion tests', function () {
+            let accordion, headings, panels;
+            setup(function () {
+                accordion = fixture('basic');
+                headings = Array.from(accordion.querySelectorAll('rasterex-accordion-heading'));
+                panels = Array.from(accordion.querySelectorAll('rasterex-accordion-panel'));
+                // Make tests wait until elements are rendered.
+                return Promise.all([
+                    accordion.querySelector('rasterex-accordion-heading').updateComplete,
+                    accordion.querySelector('rasterex-accordion-panel').updateComplete,
+                    accordion.updateComplete
+                ]);
+            });
+
+            test('should know about all the headings', function () {
+                assert.equal(accordion.allHeadings().length, accordion.querySelectorAll('rasterex-accordion-heading').length);
+            });
+
+            test('should know about all the panels', function () {
+                assert.equal(accordion.allPanels().length, accordion.querySelectorAll('rasterex-accordion-panel').length);
+            });
+
+            test('should’t overwrite existing IDs with generated ones', function () {
+                assert.equal(headings[0].id, 'demo-id');
+                assert.equal(panels[0].getAttribute('aria-labelledby'), 'demo-id');
+            });
+
+            test('should ensure IDs to all headings', function () {
+                headings.forEach(heading => {
+                    assert.isAbove(heading.id.length, 0);
+                });
+            });
+
+            test('should ensure IDs to all panels', function () {
+                panels.forEach(panel => {
+                    assert.isAbove(panel.id.length, 0);
+                });
+            });
+
+            test('should add `aria-controls` to headings', function () {
+                headings.forEach(heading => assert.isString(heading.getAttribute('aria-controls')));
+            });
+
+            test('should add `aria-labelledby` to panels', function () {
+                panels.forEach(panel => assert.isString(panel.getAttribute('aria-labelledby')));
+            });
+
+            test('shouldn\'t have any expanded headings initially', function () {
+                assert.equal(headings.filter(
+                    heading => heading.expanded === true
+                ).length, 0);
+            });
+
+            test('shouldn\'t have any expanded panels initially', function () {
+                assert.equal(panels.filter(
+                    panel => panel.expanded === true
+                ).length, 0);
+            });
+
+            test('should change expanded state for heading and panel when calling `onClick()` on heading', function (done) {
+                const firstHeading = accordion.firstHeading();
+                const panelForHeading = accordion.panelForHeading(firstHeading);
+
+                assert.equal(firstHeading.expanded, false)
+                assert.equal(panelForHeading.expanded, false)
+
+                firstHeading.onClick();
+                // Data bindings will stamp out new DOM asynchronously
+                // so wait to check for updates
+                flush(function () {
+                    assert.equal(firstHeading.expanded, true)
+                    assert.equal(panelForHeading.expanded, true)
+                    done();
+                });
+            });
+
+            test('should change heading expanded state to `true` when calling `expandHeading()`', function(done) {
+                const nextHeading = accordion.nextHeading();
+                assert.equal(nextHeading.expanded, false);
+
+                accordion.expandHeading(nextHeading);
+                // Data bindings will stamp out new DOM asynchronously
+                // so wait to check for updates
+                flush(function () {
+                    assert.equal(nextHeading.expanded, true);
+                    done();
+                });
+            })
+
+            test('should change panel expanded state to `true` when calling `expandPanel()`', function(done) {
+                const nextHeading = accordion.nextHeading();
+                const panelForHeading = accordion.panelForHeading(nextHeading);
+
+                assert.equal(panelForHeading.expanded, false);
+
+                accordion.expandPanel(panelForHeading);
+                // Data bindings will stamp out new DOM asynchronously
+                // so wait to check for updates
+                flush(function () {
+                    assert.equal(panelForHeading.expanded, true);
+                    done();
+                });
+            })
+
+            test('should change heading expanded state to `false` when calling `collapseHeading()`', function(done) {
+                const firstHeading = accordion.firstHeading();
+                assert.equal(firstHeading.expanded, false);
+
+                firstHeading.expanded = true;
+                accordion.collapseHeading(firstHeading);
+                // Data bindings will stamp out new DOM asynchronously
+                // so wait to check for updates
+                flush(function () {
+                    assert.equal(firstHeading.expanded, false);
+                    done();
+                });
+            })
+
+            test('should change panel expanded state to `false` when calling `collapsePanel()`', function(done) {
+                const firstHeading = accordion.firstHeading();
+                const panelForHeading = accordion.panelForHeading(firstHeading);
+
+                panelForHeading.expanded = true;
+
+                accordion.collapsePanel(panelForHeading);
+                // Data bindings will stamp out new DOM asynchronously
+                // so wait to check for updates
+                flush(function () {
+                    assert.equal(panelForHeading.expanded, false);
+                    done();
+                });
+            })
+
+            test('a11y', function () {
+                return axeReport(accordion);
+            });
+        });
+    </script>
+</body>
+
+</html>

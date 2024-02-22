@@ -1,0 +1,36 @@
+{
+    "compilerOptions": {
+      "target": "es6",
+      // "allowJs": true,
+      "module": "esnext",
+      "moduleResolution": "node",
+      "allowSyntheticDefaultImports": true,
+      "declaration": true,
+      "outDir": "./dist",
+      "lib": ["es2016", "dom"],
+      // "strict": true,
+      // "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noImplicitReturns": true,
+      "noFallthroughCasesInSwitch": true,
+      "experimentalDecorators": true,
+      "plugins": [
+        {
+          "name": "typescript-lit-html-plugin",
+          "tags": [
+            "html",
+            "template"
+          ],
+          "format": { "enabled": true }
+        }
+      ],
+      "typeRoots": ["**/node_modules/@types","./custom_types"]
+    },
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules",
+      "custom_types"
+    ]
+  }

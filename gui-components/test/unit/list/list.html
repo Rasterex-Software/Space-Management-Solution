@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>rasterex-list</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="../../../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../../node_modules/chai/chai.js"></script>
+    <script src="../../../node_modules/mocha/mocha.js"></script>
+    <script src="../../../node_modules/wct-mocha/wct-mocha.js"></script>
+</head>
+
+<body>
+    <test-fixture id="basic">
+        <template>
+            <rasterex-listbox selected="one">
+                <rasterex-item value="one">First item</rasterex-item>
+                <rasterex-item value="two">Second Item</rasterex-item>
+                <rasterex-item value="three">Three item</rasterex-item>
+                <rasterex-item value="four">Four Item</rasterex-item>
+            </rasterex-listbox>
+        </template>
+    </test-fixture>
+
+    <script type="module">
+        import '@polymer/test-fixture';
+        import 'axe-core/axe.min.js';
+        import { axeReport } from 'pwa-helpers/axe-report.js';
+        import '../../../dist/components/list/rasterex-listbox.js';
+        import '../../../dist/components/list/rasterex-item.js';
+
+
+        suite('rasterex-list tests', function () {
+            let list;
+            let items;
+            setup(function () {
+                list = fixture('basic');
+                items = Array.from(list.querySelectorAll('rasterex-item'));
+
+                // Make tests wait until elements are rendered.
+                return Promise.all([list.updateComplete, list.querySelector('rasterex-item').updateComplete]);
+            });
+
+            test('should set default role', function () {
+                assert.equal(list.getAttribute('role'), 'listbox');
+            });
+
+            test('should know about all the items', function () {
+                assert.equal(list.itemNodes.length, list.querySelectorAll('rasterex-item').length);
+            });
+
+            test('should add `role` to items', function () {
+                items.forEach(item => assert.isString(item.getAttribute('role')));
+            });
+
+            test('should have one selected item initially', function () {
+                assert.equal(items.filter(
+                    item => item.hasAttribute('aria-selected') === true
+                ).length, 1);
+            });
+
+            test('should switch to horizontal display when attribute horizontal is set', function (done) {
+                list.setAttribute('horizontal', '');
+                flush(function () {
+                    assert.equal(list.classList.contains('horizontal'), true);
+                    done();
+                });
+            });
+
+            test('should fire `selected` event when item is selected', function () {
+                list.addEventListener('selected', function (event) {
+                    assert.equal(event.detail.selected, list.selected);
+                });
+
+                list.selectNext();
+            });
+
+            test('should change selected when calling `selectPrevious`', function (done) {
+                list.selected = 'three'
+                const currentSelected = list.selected                
+                flush(function () {
+                    list.selectPrevious();
+                    assert.notEqual(list.selected, currentSelected)
+                    assert.equal(list.selected, 'two');
+                    done();
+                })
+            });
+
+            test('should change selected when calling `selectNext`', function (done) {
+                list.selected = 'one'
+                const currentSelected = list.selected                
+                flush(function () {
+                    list.selectNext();
+                    assert.notEqual(list.selected, currentSelected)
+                    assert.equal(list.selected, 'two')
+                    done();
+                });
+            });
+
+            test('should allow adding items programmatically', function (done) {
+                // create new tab
+                const item = document.createElement('rasterex-item');
+                item.value = 'five';
+                item.innerText = 'Five item'
+
+                // append new tab and panel to tablist
+                list.appendChild(item);
+
+                // Data bindings will stamp out new DOM asynchronously
+                // so wait to check for updates
+                flush(function () {
+                    // should know about new item
+                    assert.equal(list.itemNodes.length, list.querySelectorAll('rasterex-item').length);
+                    done();
+                });
+
+            });
+
+            test('a11y', function () {
+                return axeReport(list);
+            });
+        });
+    </script>
+</body>
+
+</html>

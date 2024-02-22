@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>rasterex-tree-view</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="../../../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../../node_modules/chai/chai.js"></script>
+    <script src="../../../node_modules/mocha/mocha.js"></script>
+    <script src="../../../node_modules/wct-mocha/wct-mocha.js"></script>
+</head>
+
+<body>
+    <test-fixture id="basic">
+        <template>
+            <rasterex-tree-view></rasterex-tree-view>
+        </template>
+    </test-fixture>
+
+    <script type="module">
+        import '@polymer/test-fixture';
+        import 'axe-core/axe.min.js';
+        import { axeReport } from 'pwa-helpers/axe-report.js';
+        import '../../../dist/components/tree-view/rasterex-tree-view.js';
+        import '../../../dist/components/tree-view/rasterex-tree-view-node.js';
+
+        suite('basic', function () {
+            var tree;
+            setup(function () {
+                // Ensure focus is set to document.body
+                document.body.focus();
+                tree = fixture('basic');
+
+                return Promise.all([
+                    tree.updateComplete,
+                ]);
+            });
+
+            test('defines the default "data" property to `null`', function () {
+                assert.equal(tree.data, null);
+            });
+
+            test('defines the default "selected" property to `null`', function () {
+                assert.equal(tree.selected, null);
+            });
+
+            test('detects when data is changed', function (done) {
+                tree.data = { name: 'root' };
+
+                flush(function () {
+                    assert.equal(tree.root.data.name, tree.data.name);
+                    done();
+                })
+            });
+
+            test('cannot select any other element than a <rasterex-tree-view-node>', function () {
+                let found = false;
+
+                tree.selectNode({ detail: document.body });
+
+                for (let i = 0; i < tree.root.classList.length; i++) {
+                    if (tree.root.classList[i] === 'selected') {
+                        found = true;
+                        break;
+                    }
+                }
+
+                assert.notEqual(document.body.className, 'selected');
+                assert.equal(found, false);
+                assert.equal(tree.selected, null);
+            });
+
+            test('can select any <rasterex-tree-view-node>', function () {
+                let found = false;
+
+                tree.selectNode({ detail: tree.root });
+
+                for (let i = 0; i < tree.root.classList.length; i++) {
+                    if (tree.root.classList[i] === 'selected') {
+                        found = true;
+                        break;
+                    }
+                }
+
+                assert.equal(document.body.className, '');
+                assert.equal(found, true);
+                assert.equal(tree.selected, tree.root);
+            });
+
+            test('should listen for `select` event when select <rasterex-tree-view-node>', function (done) {
+                tree.addEventListener('select', function (event) {
+                    assert.equal(event.detail, tree.root);
+                    done();
+                });
+
+                tree.root.select();
+            });
+
+            test('a11y', function () {
+                return axeReport(tree);
+            });
+        });
+    </script>
+</body>
+
+</html>

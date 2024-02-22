@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>rasterex-tabs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="../../../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../../node_modules/chai/chai.js"></script>
+    <script src="../../../node_modules/mocha/mocha.js"></script>
+    <script src="../../../node_modules/wct-mocha/wct-mocha.js"></script>
+</head>
+
+<body>
+    <test-fixture id="basic">
+        <template>
+            <rasterex-tabs>
+                <rasterex-tab id="demo-id" dismiss>Tab 1</rasterex-tab>
+                <rasterex-tabpanel>Content 1</rasterex-tabpanel>
+                <rasterex-tab dismiss>Tab 2</rasterex-tab>
+                <rasterex-tabpanel>Content 2</rasterex-tabpanel>
+                <rasterex-tab dismiss>Tab 3</rasterex-tab>
+                <rasterex-tabpanel>Content 3</rasterex-tabpanel>
+            </rasterex-tabs>
+        </template>
+    </test-fixture>
+
+    <script type="module">
+        import '@polymer/test-fixture';
+        import 'axe-core/axe.min.js';
+        import { axeReport } from 'pwa-helpers/axe-report.js';
+        import '../../../dist/components/tabs/rasterex-tab.js';
+        import '../../../dist/components/tabs/rasterex-tabs.js';
+        import '../../../dist/components/tabs/rasterex-tabpanel.js';
+
+        suite('rasterex-tabs tests', function () {
+            let tablist;
+            let tabs;
+            let panels;
+            setup(function () {
+                tablist = fixture('basic');
+                tabs = tablist.querySelectorAll('rasterex-tab');
+                panels = tablist.querySelectorAll('rasterex-tabpanel');
+
+                // Make tests wait until elements are rendered.
+                return Promise.all([tablist.querySelector('rasterex-tab').updateComplete, tablist.querySelector('rasterex-tabpanel').updateComplete, tablist.updateComplete]);
+            });
+
+            test('should set default role', function () {
+                assert.equal(tablist.role, 'tablist');
+            });
+
+            test('should set default draggable', function () {
+                assert.equal(tablist.draggable, false);
+            });
+
+            test('should set default collapsible', function () {
+                assert.equal(tablist.collapsible, false);
+            });
+
+            test('should know about all the tabs', function () {
+                assert.equal(tablist.allTabs().length, tablist.querySelectorAll('rasterex-tab').length);
+            });
+
+            test('should know about all the panels', function () {
+                assert.equal(tablist.allPanels().length, tablist.querySelectorAll('rasterex-tabpanel').length);
+            });
+
+            test('should’t overwrite existing IDs with generated ones', function () {
+                assert.equal(tabs[0].id, 'demo-id');
+                assert.equal(panels[0].getAttribute('aria-labelledby'), 'demo-id');
+            });
+
+            test('should ensure IDs to all tabs', function () {
+                tabs.forEach(tab => {
+                    assert.isAbove(tab.id.length, 0);
+                });
+            });
+
+            test('should add `aria-controls` to tabs', function () {
+                tabs.forEach(tab => assert.isString(tab.getAttribute('aria-controls')));
+            });
+
+            test('should add `aria-labelledby` to panels', function () {
+                panels.forEach(panel => assert.isString(panel.getAttribute('aria-labelledby')));
+            });
+
+            test('should have one selected tab initially', function () {
+                assert.equal(Array.from(tabs).filter(
+                    tab => tab.selected === true
+                ).length, 1);
+            });
+
+            test('should only have one visible panel initially', function () {
+                assert.equal(Array.from(panels).filter(
+                    panel => panel.hidden === false
+                ).length, 1);
+            });
+
+            test('should switch visibility when calling `selectTab()`', function () {
+                const selectedTab = Array.from(tabs).find(tab => tab.selected === true);
+                const selectedPanel = Array.from(panels).find(panel => panel.id === selectedTab.getAttribute('aria-controls'));
+                const otherTab = Array.from(tabs).find(tab => tab !== selectedTab);
+                const otherPanel = Array.from(panels).find(panel => panel.id === otherTab.getAttribute('aria-controls'));
+
+                assert.equal(otherTab.selected, false);
+                assert.equal(otherPanel.hidden, true);
+                // switch visibility
+                tablist.selectTab(otherTab);
+                assert.equal(otherTab.selected, true);
+                assert.equal(otherPanel.hidden, false);
+                assert.equal(selectedTab.selected, false);
+                assert.equal(selectedPanel.hidden, true);
+            });
+
+            test('should collapse when attribute collapsible is set and calling `collapse()`', function (done) {
+                // tablist.main is collapsible container, should be null if collapsible is not set
+                assert.isNull(tablist.main);
+
+                tablist.collapsible = true;
+
+                // Data bindings will stamp out new DOM asynchronously
+                // so wait to check for updates
+                flush(function () {
+                    assert.isNotNull(tablist.main);
+                    // call `colapse()`
+                    tablist.collapse();
+                    assert.equal(tablist.main.classList.contains('collapsed'), true);
+                    done();
+                });
+            });
+
+            test('should allow adding tabs and panels programmatically', function (done) {
+                // create new tab
+                const newTab = document.createElement('rasterex-tab');
+                newTab.innerText = 'Tab 4'
+
+                // create new panel
+                const newPanel = document.createElement('rasterex-tabpanel');
+                newPanel.innerText = 'Content 4';
+
+                // append new tab and panel to tablist
+                tablist.appendChild(newTab);
+                tablist.appendChild(newPanel);
+
+                // Data bindings will stamp out new DOM asynchronously
+                // so wait to check for updates
+                flush(function () {
+                    // should know about new tab
+                    assert.equal(tablist.allTabs().length, tablist.querySelectorAll('rasterex-tab').length);
+                    assert.equal(tablist.allPanels().length, tablist.querySelectorAll('rasterex-tabpanel').length);
+                    done();
+                });
+
+            });
+
+            test('a11y', function () {
+                return axeReport(tablist);
+            });
+        });
+    </script>
+</body>
+
+</html>

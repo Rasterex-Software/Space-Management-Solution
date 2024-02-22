@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>rasterex-tree-view-node</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="../../../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../../node_modules/chai/chai.js"></script>
+    <script src="../../../node_modules/mocha/mocha.js"></script>
+    <script src="../../../node_modules/wct-mocha/wct-mocha.js"></script>
+</head>
+
+<body>
+    <test-fixture id="basic">
+        <template>
+            <rasterex-tree-view-node></rasterex-tree-view-node>
+        </template>
+    </test-fixture>
+
+    <script type="module">
+        import '@polymer/test-fixture';
+        import 'axe-core/axe.min.js';
+        import { axeReport } from 'pwa-helpers/axe-report.js';
+        import { Base } from '@polymer/polymer/polymer-legacy.js';
+        import '../../../dist/components/tree-view/rasterex-tree-view-node.js';
+
+        suite('basic', function () {
+            let node;
+            setup(function () {
+                // Ensure focus is set to document.body
+                document.body.focus();
+                node = fixture('basic');
+
+                return Promise.all([
+                    node.updateComplete,
+                ]);
+            });
+
+            test('defines the default "data" property to `null`', function () {
+                assert.equal(node.data, null);
+            });
+
+            test('properly computes its classes', function (done) {
+                // Some defaults tests
+                let cssClass = node.computeClass();
+                assert.equal(cssClass, 'node-preicon ');
+
+                // test for expanded with no children
+                node.data = { open: true };
+                Base.async(function () {
+                    cssClass = node.computeClass();
+                    assert.equal(cssClass, 'node-preicon ');
+
+                    // test for expanded with empty children
+                    node.data = { open: true, children: [] };
+                    Base.async(function () {
+                        cssClass = node.computeClass();
+                        assert.equal(cssClass, 'node-preicon ');
+
+                        // test for collapsed with children
+                        node.data = { open: false, children: [0] };
+                        Base.async(function () {
+                            cssClass = node.computeClass();
+                            assert.equal(cssClass, 'node-preicon collapsed');
+
+                            // test for expanded with children
+                            node.data = { open: true, children: [0] };
+                            Base.async(function () {
+                                cssClass = node.computeClass();
+                                assert.equal(cssClass, 'node-preicon expanded');
+                                done();
+                            }, 1)
+                        }, 1)
+                    }, 1);
+                }, 1)
+            });
+
+            test('ables to toggle its children', function () {
+                node.data = {
+                    children: [],
+                    open: false
+                };
+
+                // No children, open state is always false.
+                node.toggleChildren();
+                assert.equal(node.data.open, false);
+
+                // Same thing.
+                node.data.open = true;
+                node.toggleChildren();
+                assert.equal(node.data.open, false);
+
+                // With children, open state is toggled properly.
+                node.data.children = [1];
+                node.toggleChildren();
+                assert.equal(node.data.open, true);
+
+                node.toggleChildren();
+                assert.equal(node.data.open, false);
+            });
+
+            test('should fire `select` event when selected', function (done) {
+                node.addEventListener('select', function (event) {
+                    assert.equal(event.detail, node);
+                    done();
+                });
+
+                node.data = {
+                    children: [1],
+                    open: false
+                };
+
+                node.select();
+            });
+
+            test('should fire `toggle` event when toggle children <rasterex-tree-view-node>', function (done) {
+                node.addEventListener('toggle', function (event) {
+                    assert.equal(event.detail, node);
+                    done();
+                });
+
+                node.data = {
+                    children: [1],
+                    open: false
+                };
+
+                node.toggleChildren();
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+/* example of the available css vars */
+rasterex-toggle-button {
+    --rstxToggleButtonTransition: background-color .5s ease;
+    --rstxToggleButtonCursor: pointer;
+    --rstxToggleButtonBgColor: #eaeaea;
+    --rstxToggleButtonBorder: 1px solid #333;
+    --rstxToggleButtonBorderRadius: 3px;
+    --rstxToggleButtonPressedBgColor: #9a9a9a;
+    --rstxToggleButtonPadding: 0;
+    --rstxToggleButtonLabelPadding: 0;
+}
