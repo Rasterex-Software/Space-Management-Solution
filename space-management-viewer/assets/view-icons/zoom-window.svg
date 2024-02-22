@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Icons/zoom-window</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/zoom-window" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M38.7291698,45.5 L56.5,45.5 L56.5,6.5 L17.5,6.5 L17.5,23.6294512 C19.8740189,22.2442098 22.5821688,21.5 25.4,21.5 C34.0708706,21.5 41.1,28.5291294 41.1,37.2 C41.1,40.179529 40.2676491,43.0350538 38.7291698,45.5 Z" id="Combined-Shape" stroke="#373737"></path>
+        <g id="Icons/magnifying-glass" transform="translate(3.000000, 20.000000)" stroke="#373737">
+            <g id="Magnifying-Glass" transform="translate(2.000000, 2.000000)">
+                <circle id="Oval" cx="20.4" cy="15.2" r="15.2"></circle>
+                <path d="M9.4,26.6 L0.2,35.8" id="Line-2" stroke-linecap="square"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Icons/zoom-in</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/zoom-in" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M24.32,27.52 L48.32,27.52" id="Line" stroke="#373737" stroke-linecap="square"></path>
+        <path d="M24.32,27.52 L48.32,27.52" id="Line-3" stroke="#373737" stroke-linecap="square" transform="translate(36.480000, 27.520000) rotate(-90.000000) translate(-36.480000, -27.520000) "></path>
+        <g id="Icons/magnifying-glass" stroke="#373737">
+            <g id="Magnifying-Glass" transform="translate(3.200000, 3.200000)">
+                <circle id="Oval" cx="32.64" cy="24.32" r="24.32"></circle>
+                <path d="M15.04,42.56 L0.32,57.28" id="Line-2" stroke-linecap="square"></path>
+            </g>
+        </g>
+    </g>
+</svg>

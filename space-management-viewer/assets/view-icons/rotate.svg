@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Icons/rotate</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/rotate" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" stroke="#373737" transform="translate(34.000000, 32.000000) rotate(-45.000000) translate(-34.000000, -32.000000) " x="24.5" y="12.5" width="19" height="39"></rect>
+        <g id="Group" transform="translate(8.208375, 29.080317)" stroke="#373737">
+            <path d="M17.2916249,19.419683 L21.2916249,23.419683" id="Line-5" stroke-linecap="square"></path>
+            <path d="M17.2916249,23.419683 L21.2916249,27.419683" id="Line-5" stroke-linecap="square" transform="translate(19.291625, 25.419683) scale(-1, 1) translate(-19.291625, -25.419683) "></path>
+            <path d="M21.2916249,23.419683 C2.64524018,24.7530164 -3.75380558,16.9464554 2.09448765,-1.77635684e-14" id="Path-4"></path>
+        </g>
+        <g id="Group" transform="translate(45.208375, 18.080317) rotate(180.000000) translate(-45.208375, -18.080317) translate(34.208375, 4.080317)" stroke="#373737">
+            <path d="M17.2916249,19.419683 L21.2916249,23.419683" id="Line-5" stroke-linecap="square"></path>
+            <path d="M17.2916249,23.419683 L21.2916249,27.419683" id="Line-5" stroke-linecap="square" transform="translate(19.291625, 25.419683) scale(-1, 1) translate(-19.291625, -25.419683) "></path>
+            <path d="M21.2916249,23.419683 C2.64524018,24.7530164 -3.75380558,16.9464554 2.09448765,-1.77635684e-14" id="Path-4"></path>
+        </g>
+    </g>
+</svg>

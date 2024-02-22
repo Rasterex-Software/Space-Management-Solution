@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <symbol viewBox="0 0 64 64" id="fit-both"
+        xmlns="http://www.w3.org/2000/svg">
+        <g >
+            <g transform="translate(3.2 3.2)">
+                <circle cx="32.64" cy="24.32" r="24.32"/>
+                <path d="M15.04 42.56L.32 57.28" stroke-linecap="square"/>
+            </g>
+            <g stroke-linecap="round">
+                <path d="M20.5 27.5h32M20.5 27.5l4.067-4.067M24.5 31.5l-4.067-4.067"/>
+                <g>
+                    <path d="M52.5 27.5l-4.067-4.067M48.5 31.5l4.067-4.067"/>
+                </g>
+            </g>
+            <g stroke-linecap="round">
+                <path d="M36.5 11.5v32M36.5 11.5l4.067 4.067M32.5 15.5l4.067-4.067"/>
+                <g>
+                    <path d="M36.5 43.5l4.067-4.067M32.5 39.5l4.067 4.067"/>
+                </g>
+            </g>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 64 64" id="fit-height"
+        xmlns="http://www.w3.org/2000/svg">
+        <g >
+            <g transform="translate(3.2 3.2)">
+                <circle cx="32.64" cy="24.32" r="24.32"/>
+                <path d="M15.04 42.56L.32 57.28" stroke-linecap="square"/>
+            </g>
+            <g stroke-linecap="round">
+                <path d="M35.5 11.5v32M35.5 11.5l4.067 4.067M31.5 15.5l4.067-4.067"/>
+                <g>
+                    <path d="M35.5 43.5l4.067-4.067M31.5 39.5l4.067 4.067"/>
+                </g>
+            </g>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 64 64" id="fit-width"
+        xmlns="http://www.w3.org/2000/svg">
+        <g >
+            <g transform="translate(3.2 3.2)">
+                <circle cx="32.64" cy="24.32" r="24.32"/>
+                <path d="M15.04 42.56L.32 57.28" stroke-linecap="square"/>
+            </g>
+            <g stroke-linecap="round">
+                <path d="M20.5 27.5h32M20.5 27.5l4.067-4.067M24.5 31.5l-4.067-4.067"/>
+                <g>
+                    <path d="M52.5 27.5l-4.067-4.067M48.5 31.5l4.067-4.067"/>
+                </g>
+            </g>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 64 64" id="magnifying-glass"
+        xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(3.2 3.2)" >
+            <circle cx="32.64" cy="24.32" r="24.32"/>
+            <path d="M15.04 42.56L.32 57.28" stroke-linecap="square"/>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 64 64" id="rotate"
+        xmlns="http://www.w3.org/2000/svg">
+        <g >
+            <path d="M13.494 24.929l13.435-13.435L54.506 39.07 41.071 52.506z"/>
+            <path d="M25.5 48.5l4 4M29.5 52.5l-4 4" stroke-linecap="square"/>
+            <path d="M29.5 52.5c-18.646 1.333-25.045-6.473-19.197-23.42"/>
+            <g>
+                <path d="M38.917 12.66l-4-4M34.917 8.66l4-4" stroke-linecap="square"/>
+                <path d="M34.917 8.66c18.646-1.333 25.045 6.474 19.197 23.42"/>
+            </g>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 64 64" id="zoom-in"
+        xmlns="http://www.w3.org/2000/svg">
+        <g >
+            <path d="M24.32 27.52h24M36.48 39.68v-24" stroke-linecap="square"/>
+            <g transform="translate(3.2 3.2)">
+                <circle cx="32.64" cy="24.32" r="24.32"/>
+                <path d="M15.04 42.56L.32 57.28" stroke-linecap="square"/>
+            </g>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 64 64" id="zoom-out"
+        xmlns="http://www.w3.org/2000/svg">
+        <g >
+            <path d="M24.32 27.52h24" stroke-linecap="square"/>
+            <g transform="translate(3.2 2.2)">
+                <circle cx="32.64" cy="24.32" r="24.32"/>
+                <path d="M15.04 42.56L.32 57.28" stroke-linecap="square"/>
+            </g>
+        </g>
+    </symbol>
+    <symbol viewBox="0 0 64 64" id="zoom-window"
+        xmlns="http://www.w3.org/2000/svg">
+        <g >
+            <path d="M38.73 45.5H56.5v-39h-39v17.13a15.63 15.63 0 0 1 7.9-2.13c8.67 0 15.7 7.03 15.7 15.7 0 2.98-.832 5.835-2.37 8.3z"/>
+            <g transform="translate(5 22)">
+                <circle cx="20.4" cy="15.2" r="15.2"/>
+                <path d="M9.4 26.6L.2 35.8" stroke-linecap="square"/>
+            </g>
+        </g>
+    </symbol>
+</svg>
